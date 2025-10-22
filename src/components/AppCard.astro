@@ -1,0 +1,93 @@
+---  
+const { app } = Astro.props;  
+---  
+  
+<a href={`/${app.slug}`} class="app-card">  
+    <img src={app.icon} alt={app.title} class="app-icon" loading="lazy">  
+    <div class="app-info">  
+        <h3 class="app-title">{app.title}</h3>  
+        <p class="app-version">{app.version || 'Latest'}</p>  
+        <p class="app-mod">{app.modFeatures || 'MOD Features'}</p>  
+        <div class="stars">★★★★★</div>  
+    </div>  
+</a>  
+  
+<style>  
+    .app-card {  
+        background: #141414;  
+        border: 1px solid #222;  
+        border-radius: 16px;  
+        padding: 1.5rem;  
+        cursor: pointer;  
+        transition: all 0.3s ease;  
+        display: flex;  
+        gap: 1rem;  
+        text-decoration: none;  
+        color: inherit;  
+    }  
+  
+    .app-card:hover {  
+        background: #1a1a1a;  
+        border-color: #333;  
+        transform: translateY(-2px);  
+    }  
+  
+    .app-icon {  
+        width: 80px;  
+        height: 80px;  
+        border-radius: 18px;  
+        flex-shrink: 0;  
+        object-fit: cover;  
+    }  
+  
+    .app-info {  
+        flex: 1;  
+        min-width: 0;  
+    }  
+  
+    .app-title {  
+        font-size: 1.1rem;  
+        font-weight: 600;  
+        margin-bottom: 0.3rem;  
+        color: #fff;  
+        overflow: hidden;  
+        text-overflow: ellipsis;  
+        white-space: nowrap;  
+    }  
+  
+    .app-version {  
+        font-size: 0.85rem;  
+        color: #888;  
+        margin-bottom: 0.3rem;  
+    }  
+  
+    .app-mod {  
+        font-size: 0.85rem;  
+        color: #667eea;  
+        font-weight: 500;  
+        overflow: hidden;  
+        text-overflow: ellipsis;  
+        white-space: nowrap;  
+    }  
+  
+    .stars {  
+        margin-top: 0.5rem;  
+        color: #fbbf24;  
+        font-size: 0.9rem;  
+    }  
+  
+    @media (max-width: 768px) {  
+        .app-card {  
+            padding: 1rem;  
+        }  
+  
+        .app-icon {  
+            width: 60px;  
+            height: 60px;  
+        }  
+  
+        .app-title {  
+            font-size: 1rem;  
+        }  
+    }  
+</style>
