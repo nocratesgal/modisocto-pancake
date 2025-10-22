@@ -1,0 +1,114 @@
+---  
+import Layout from '../layouts/Layout.astro';  
+import AppCard from '../components/AppCard.astro';  
+import apps from '../data/apps.json';  
+  
+const trendingApps = apps.slice(0, 12);  
+const topGames = apps.filter(a => a.type === 'games').slice(0, 8);  
+const topApps = apps.filter(a => a.type === 'apps').slice(0, 8);  
+---  
+  
+<Layout title="ModLynx - Premium Modded Apps & Games">  
+    <div class="hero">  
+        <h1>Trending Apps ⚡</h1>  
+        <p>Explore premium modded apps with unlocked features</p>  
+    </div>  
+  
+    <section class="section">  
+        <div class="container">  
+            <div class="apps-grid">  
+                {trendingApps.map(app => <AppCard app={app} />)}  
+            </div>  
+        </div>  
+    </section>  
+  
+    <section class="section">  
+        <div class="container">  
+            <h2 class="section-title">🎮 Top Games</h2>  
+            <div class="apps-grid">  
+                {topGames.map(app => <AppCard app={app} />)}  
+            </div>  
+            <a href="/games" class="view-all">View All Games →</a>  
+        </div>  
+    </section>  
+  
+    <section class="section">  
+        <div class="container">  
+            <h2 class="section-title">📱 Top Apps</h2>  
+            <div class="apps-grid">  
+                {topApps.map(app => <AppCard app={app} />)}  
+            </div>  
+            <a href="/apps" class="view-all">View All Apps →</a>  
+        </div>  
+    </section>  
+</Layout>  
+  
+<style>  
+    .hero {  
+        padding: 3rem 2rem 2rem;  
+        max-width: 1400px;  
+        margin: 0 auto;  
+    }  
+  
+    .hero h1 {  
+        font-size: 2.5rem;  
+        font-weight: 700;  
+        margin-bottom: 0.5rem;  
+        letter-spacing: -1px;  
+    }  
+  
+    .hero p {  
+        color: #888;  
+        font-size: 1.1rem;  
+    }  
+  
+    .section {  
+        margin: 2rem 0;  
+    }  
+  
+    .container {  
+        max-width: 1400px;  
+        margin: 0 auto;  
+        padding: 0 2rem;  
+    }  
+  
+    .section-title {  
+        font-size: 1.8rem;  
+        margin-bottom: 1.5rem;  
+        letter-spacing: -0.5px;  
+    }  
+  
+    .apps-grid {  
+        display: grid;  
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  
+        gap: 1.5rem;  
+        margin-bottom: 2rem;  
+    }  
+  
+    .view-all {  
+        display: inline-block;  
+        color: #667eea;  
+        font-weight: 600;  
+        text-decoration: none;  
+        transition: transform 0.3s;  
+    }  
+  
+    .view-all:hover {  
+        transform: translateX(5px);  
+    }  
+  
+    @media (max-width: 768px) {  
+        .hero h1 {  
+            font-size: 1.8rem;  
+        }  
+  
+        .apps-grid {  
+            grid-template-columns: 1fr;  
+            padding: 0;  
+        }  
+  
+        .container {  
+            padding: 0 1rem;  
+        }  
+    }  
+</style>
