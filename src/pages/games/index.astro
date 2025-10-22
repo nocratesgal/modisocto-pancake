@@ -1,0 +1,88 @@
+---  
+import Layout from '../../layouts/Layout.astro';  
+import AppCard from '../../components/AppCard.astro';  
+import apps from '../../data/apps.json';  
+  
+const games = apps.filter(a => a.type === 'games');  
+---  
+  
+<Layout title="All Games - ModLynx" description="Browse all modded games with premium features unlocked.">  
+    <div class="page-header">  
+        <h1>🎮 All Games</h1>  
+        <p>Browse {games.length} modded games</p>  
+          
+        <div class="category-pills">  
+            <a href="/games/arcade" class="pill">Arcade</a>  
+            <a href="/games/action" class="pill">Action</a>  
+            <a href="/games/strategy" class="pill">Strategy</a>  
+            <a href="/games/racing" class="pill">Racing</a>  
+            <a href="/games/puzzle" class="pill">Puzzle</a>  
+            <a href="/games/rpg" class="pill">RPG</a>  
+        </div>  
+    </div>  
+  
+    <div class="container">  
+        <div class="apps-grid">  
+            {games.map(app => <AppCard app={app} />)}  
+        </div>  
+    </div>  
+</Layout>  
+  
+<style>  
+    .page-header {  
+        padding: 3rem 2rem 2rem;  
+        max-width: 1400px;  
+        margin: 0 auto;  
+    }  
+  
+    .page-header h1 {  
+        font-size: 2.5rem;  
+        font-weight: 700;  
+        margin-bottom: 0.5rem;  
+    }  
+  
+    .page-header p {  
+        color: #888;  
+        font-size: 1.1rem;  
+        margin-bottom: 1.5rem;  
+    }  
+  
+    .category-pills {  
+        display: flex;  
+        gap: 1rem;  
+        flex-wrap: wrap;  
+    }  
+  
+    .pill {  
+        background: #1a1a1a;  
+        color: #fff;  
+        padding: 0.5rem 1.5rem;  
+        border-radius: 50px;  
+        text-decoration: none;  
+        border: 1px solid #333;  
+        transition: all 0.3s;  
+    }  
+  
+    .pill:hover {  
+        background: #667eea;  
+        border-color: #667eea;  
+    }  
+  
+    .container {  
+        max-width: 1400px;  
+        margin: 0 auto;  
+        padding: 2rem;  
+    }  
+  
+    .apps-grid {  
+        display: grid;  
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  
+        gap: 1.5rem;  
+    }  
+  
+    @media (max-width: 768px) {  
+        .apps-grid {  
+            grid-template-columns: 1fr;  
+        }  
+    }  
+</style>
