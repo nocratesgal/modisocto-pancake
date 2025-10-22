@@ -3,15 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import AppCard from '../components/AppCard.astro';  
 import apps from '../data/apps.json';  
   
-const trendingApps = apps.slice(0, 12);  
-const topGames = apps.filter(a => a.type === 'games').slice(0, 8);  
-const topApps = apps.filter(a => a.type === 'apps').slice(0, 8);  
+const trendingApps = apps.slice(0, 24);  
 ---  
   
 <Layout title="ModLynx - Premium Modded Apps & Games">  
     <div class="hero">  
-        <h1>Trending Apps ⚡</h1>  
-        <p>Explore premium modded apps with unlocked features</p>  
+        <h1>Trending Apps & Games ⚡</h1>  
+        <p>Explore premium modded APKs with unlocked features</p>  
     </div>  
   
     <section class="section">  
@@ -24,21 +22,10 @@ const topApps = apps.filter(a => a.type === 'apps').slice(0, 8);
   
     <section class="section">  
         <div class="container">  
-            <h2 class="section-title">🎮 Top Games</h2>  
-            <div class="apps-grid">  
-                {topGames.map(app => <AppCard app={app} />)}  
+            <div class="cta-buttons">  
+                <a href="/games" class="cta-btn">🎮 Browse All Games</a>  
+                <a href="/apps" class="cta-btn">📱 Browse All Apps</a>  
             </div>  
-            <a href="/games" class="view-all">View All Games →</a>  
-        </div>  
-    </section>  
-  
-    <section class="section">  
-        <div class="container">  
-            <h2 class="section-title">📱 Top Apps</h2>  
-            <div class="apps-grid">  
-                {topApps.map(app => <AppCard app={app} />)}  
-            </div>  
-            <a href="/apps" class="view-all">View All Apps →</a>  
         </div>  
     </section>  
 </Layout>  
@@ -72,12 +59,6 @@ const topApps = apps.filter(a => a.type === 'apps').slice(0, 8);
         padding: 0 2rem;  
     }  
   
-    .section-title {  
-        font-size: 1.8rem;  
-        margin-bottom: 1.5rem;  
-        letter-spacing: -0.5px;  
-    }  
-  
     .apps-grid {  
         display: grid;  
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  
@@ -85,16 +66,27 @@ const topApps = apps.filter(a => a.type === 'apps').slice(0, 8);
         margin-bottom: 2rem;  
     }  
   
-    .view-all {  
-        display: inline-block;  
-        color: #667eea;  
+    .cta-buttons {  
+        display: flex;  
+        gap: 1.5rem;  
+        justify-content: center;  
+        flex-wrap: wrap;  
+        margin: 3rem 0;  
+    }  
+  
+    .cta-btn {  
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  
+        color: #fff;  
+        padding: 1.2rem 3rem;  
+        border-radius: 12px;  
+        font-size: 1.1rem;  
         font-weight: 600;  
         text-decoration: none;  
         transition: transform 0.3s;  
     }  
   
-    .view-all:hover {  
-        transform: translateX(5px);  
+    .cta-btn:hover {  
+        transform: scale(1.05);  
     }  
   
     @media (max-width: 768px) {  
@@ -104,11 +96,15 @@ const topApps = apps.filter(a => a.type === 'apps').slice(0, 8);
   
         .apps-grid {  
             grid-template-columns: 1fr;  
-            padding: 0;  
         }  
   
         .container {  
             padding: 0 1rem;  
+        }  
+  
+        .cta-btn {  
+            width: 100%;  
+            text-align: center;  
         }  
     }  
 </style>
