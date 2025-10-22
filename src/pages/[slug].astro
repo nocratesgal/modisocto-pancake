@@ -1,0 +1,318 @@
+---  
+import Layout from '../layouts/Layout.astro';  
+import apps from '../data/apps.json';  
+  
+export function getStaticPaths() {  
+  return apps.map(app => ({  
+    params: { slug: app.slug },  
+    props: { app }  
+  }));  
+}  
+  
+const { app } = Astro.props;  
+---  
+  
+<Layout title={`${app.title} MOD APK - ModLynx`} description={app.description || `Download ${app.title} MOD APK with ${app.modFeatures || 'premium features unlocked'}.`}>  
+    <div class="app-detail">  
+        <div class="detail-header">  
+            <img src={app.icon} alt={app.title} class="detail-icon">  
+            <div class="detail-info">  
+                <h1>{app.title}</h1>  
+                <p class="detail-meta">{app.version || 'Latest'} • {app.size || 'Varies'}</p>  
+                <p class="mod-badge">{app.modFeatures || 'Premium Unlocked'}</p>  
+                <div class="stars">★★★★★</div>  
+                <a href={app.apkUrl} class="download-btn" target="_blank" rel="noopener">  
+                    Download APK  
+                </a>  
+            </div>  
+        </div>  
+  
+        {app.screenshots && app.screenshots.length > 0 && (  
+            <div class="screenshots">  
+                <h2>Screenshots</h2>  
+                <div class="screenshots-grid">  
+                    {app.screenshots.map(screenshot => (  
+                        <img src={screenshot} alt={`${app.title} screenshot`} class="screenshot" loading="lazy">  
+                    ))}  
+                </div>  
+            </div>  
+        )}  
+  
+        <div class="info-section">  
+            <h2>App Information</h2>  
+            <div class="info-grid">  
+                <div class="info-row">  
+                    <span class="info-label">Version</span>  
+                    <span class="info-value">{app.version || 'Latest'}</span>  
+                </div>  
+                {app.size && (  
+                    <div class="info-row">  
+                        <span class="info-label">Size</span>  
+                        <span class="info-value">{app.size}</span>  
+                    </div>  
+                )}  
+                <div class="info-row">  
+                    <span class="info-label">MOD Features</span>  
+                    <span class="info-value">{app.modFeatures || 'Premium Unlocked'}</span>  
+                </div>  
+                <div class="info-row">  
+                    <span class="info-label">Updated</span>  
+                    <span class="info-value">{new Date(app.updatedAt || app.scrapedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>  
+                </div>  
+                <div class="info-row">  
+                    <span class="info-label">Requires</span>  
+                    <span class="info-value">Android 5.0+</span>  
+                </div>  
+                <div class="info-row">  
+                    <span class="info-label">Type</span>  
+                    <span class="info-value">{app.type === 'games' ? 'Game' : 'App'}</span>  
+                </div>  
+            </div>  
+        </div>  
+  
+        {app.description && (  
+            <div class="description">  
+                <h2>About {app.title}</h2>  
+                <p>{app.description}</p>  
+            </div>  
+        )}  
+  
+        <div class="download-footer">  
+            <a href={app.apkUrl} class="download-btn-large" target="_blank" rel="noopener">  
+                Download {app.title} MOD APK  
+            </a>  
+        </div>  
+    </div>  
+</Layout>  
+  
+<style>  
+    .app-detail {  
+        max-width: 900px;  
+        margin: 0 auto;  
+        padding: 2rem;  
+    }  
+  
+    .detail-header {  
+        display: flex;  
+        gap: 2rem;  
+        margin-bottom: 3rem;  
+        background: #141414;  
+        border: 1px solid #222;  
+        border-radius: 20px;  
+        padding: 2rem;  
+    }  
+  
+    .detail-icon {  
+        width: 140px;  
+        height: 140px;  
+        border-radius: 28px;  
+        flex-shrink: 0;  
+        object-fit: cover;  
+    }  
+  
+    .detail-info {  
+        flex: 1;  
+    }  
+  
+    .detail-info h1 {  
+        font-size: 2rem;  
+        margin-bottom: 0.5rem;  
+        letter-spacing: -0.5px;  
+    }  
+  
+    .detail-meta {  
+        color: #888;  
+        margin-bottom: 0.5rem;  
+        font-size: 1rem;  
+    }  
+  
+    .mod-badge {  
+        background: #667eea;  
+        color: #fff;  
+        padding: 0.4rem 1rem;  
+        border-radius: 8px;  
+        display: inline-block;  
+        font-size: 0.9rem;  
+        font-weight: 600;  
+        margin-bottom: 1rem;  
+    }  
+  
+    .stars {  
+        color: #fbbf24;  
+        font-size: 1.2rem;  
+        margin-bottom: 1.5rem;  
+    }  
+  
+    .download-btn {  
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  
+        color: #fff;  
+        border: none;  
+        padding: 1rem 3rem;  
+        border-radius: 12px;  
+        font-size: 1.1rem;  
+        font-weight: 600;  
+        cursor: pointer;  
+        transition: transform 0.2s;  
+        display: inline-block;  
+        text-decoration: none;  
+    }  
+  
+    .download-btn:hover {  
+        transform: scale(1.05);  
+    }  
+  
+    .screenshots {  
+        margin: 3rem 0;  
+    }  
+  
+    .screenshots h2 {  
+        font-size: 1.5rem;  
+        margin-bottom: 1.5rem;  
+    }  
+  
+    .screenshots-grid {  
+        display: flex;  
+        gap: 1rem;  
+        overflow-x: auto;  
+        padding: 1rem 0;  
+        scrollbar-width: thin;  
+        scrollbar-color: #333 #111;  
+    }  
+  
+    .screenshots-grid::-webkit-scrollbar {  
+        height: 8px;  
+    }  
+  
+    .screenshots-grid::-webkit-scrollbar-track {  
+        background: #111;  
+        border-radius: 4px;  
+    }  
+  
+    .screenshots-grid::-webkit-scrollbar-thumb {  
+        background: #333;  
+        border-radius: 4px;  
+    }  
+  
+    .screenshot {  
+        width: 200px;  
+        height: 350px;  
+        border-radius: 16px;  
+        object-fit: cover;  
+        flex-shrink: 0;  
+        border: 1px solid #222;  
+    }  
+  
+    .info-section {  
+        background: #141414;  
+        border: 1px solid #222;  
+        border-radius: 16px;  
+        padding: 2rem;  
+        margin: 3rem 0;  
+    }  
+  
+    .info-section h2 {  
+        font-size: 1.5rem;  
+        margin-bottom: 1.5rem;  
+    }  
+  
+    .info-grid {  
+        display: flex;  
+        flex-direction: column;  
+        gap: 1rem;  
+    }  
+  
+    .info-row {  
+        display: flex;  
+        justify-content: space-between;  
+        padding: 1rem 0;  
+        border-bottom: 1px solid #222;  
+    }  
+  
+    .info-row:last-child {  
+        border-bottom: none;  
+    }  
+  
+    .info-label {  
+        color: #888;  
+        font-weight: 500;  
+    }  
+  
+    .info-value {  
+        color: #fff;  
+        font-weight: 600;  
+        text-align: right;  
+    }  
+  
+    .description {  
+        background: #141414;  
+        border: 1px solid #222;  
+        border-radius: 16px;  
+        padding: 2rem;  
+        line-height: 1.7;  
+        color: #ccc;  
+        margin: 3rem 0;  
+    }  
+  
+    .description h2 {  
+        color: #fff;margin-bottom: 1rem;  
+        font-size: 1.5rem;  
+    }  
+  
+    .download-footer {  
+        text-align: center;  
+        margin: 3rem 0;  
+    }  
+  
+    .download-btn-large {  
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  
+        color: #fff;  
+        border: none;  
+        padding: 1.5rem 4rem;  
+        border-radius: 12px;  
+        font-size: 1.2rem;  
+        font-weight: 600;  
+        cursor: pointer;  
+        transition: transform 0.2s;  
+        display: inline-block;  
+        text-decoration: none;  
+    }  
+  
+    .download-btn-large:hover {  
+        transform: scale(1.05);  
+    }  
+  
+    @media (max-width: 768px) {  
+        .app-detail {  
+            padding: 1rem;  
+        }  
+  
+        .detail-header {  
+            flex-direction: column;  
+            padding: 1.5rem;  
+        }  
+  
+        .detail-icon {  
+            width: 100px;  
+            height: 100px;  
+        }  
+  
+        .detail-info h1 {  
+            font-size: 1.5rem;  
+        }  
+  
+        .screenshot {  
+            width: 150px;  
+            height: 260px;  
+        }  
+  
+        .download-btn {  
+            width: 100%;  
+            text-align: center;  
+        }  
+  
+        .download-btn-large {  
+            width: 100%;  
+            padding: 1.2rem 2rem;  
+        }  
+    }  
+</style>  
